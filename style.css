@@ -236,7 +236,7 @@ select {
 
 
 
-@media only screen and (min-width: 601px) and  (max-width: 768px) {
+@media only screen and (min-width: 601px) {
     .logo {
         width: 150px;
         bottom: 10px;
