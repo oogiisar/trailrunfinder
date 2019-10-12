@@ -24,25 +24,24 @@ body{
 }
 .green_leaf {
     position: absolute;
-    left: 250px;
+    left: 22%;
     width: 30px;
     bottom: 0;
 }
 .red_leaf {
     position: absolute;
-    left: 550px;
-  
+    left: 37%;
     width: 40px;
 }
 .yellow_leaf {
     position: absolute;
-    left: 860px;
+    left: 63%;
     width: 20px;
     margin-top: 50px;
 }
 .gold_leaf{
     position: absolute;
-    left: 1000px;
+    left: 77%;
     width: 20px;
     top: 0;
 }
@@ -83,10 +82,8 @@ body{
     text-align: center;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
     color:  rgb(63, 60, 60);
- 
 }
 ::placeholder {
     color: rgb(63, 60, 60);
@@ -102,6 +99,7 @@ body{
     cursor: pointer;
     font-size: 16px; 
     color: rgb(63, 60, 60);  
+    background-color: white;
   
 }
 select {
@@ -185,29 +183,36 @@ select {
     right: 120px;
 }
 
-@media only screen and (max-width: 1065px ) {
-    .lastContainer {
-        height: 100%;
+@media only screen and (max-width: 320px) {
+    #js_search_term {
+        width: 310px;
     }
-
-    #weather_box {
-        float: none;
+    
+    #weather{
+        font-size: .75em;
     }
-    #trail_data, #map {
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
+    #weather img {
+        max-width: 35px;
     }
-    #map {
-        position: static;
+    #weather{
+        font-size: .6em;
     }
-}
-
-
-@media only screen and (max-width: 600px) {
     .resultContainer {
         grid-template-columns: 1fr;
     }
+    
+    .days {
+        padding: 4px 9px;
+    }
+    .trail_name {
+        font-size: 18px;
+    }
+    .trail_picture {
+        width: 310px;
+    }
+
+}
+@media only screen and (min-width: 321px) and  (max-width: 600px) {
     .lastContainer {
         font-size: .75em;
     }
@@ -219,8 +224,6 @@ select {
     }
     
     .days {
-        border: 1px solid rgba(0, 0, 0, 0.8);
-        text-align: center;
         padding: 5px 10px;
     }
     .trail_name {
@@ -266,4 +269,21 @@ select {
     }
 }
 
+@media only screen and (max-width: 1065px ) {
+    .lastContainer {
+        height: 100%;
+    }
+
+    #weather_box {
+        float: none;
+    }
+    #trail_data, #map {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #map {
+        position: static;
+    }
+}
 
