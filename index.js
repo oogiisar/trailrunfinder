@@ -244,7 +244,7 @@ function homeButton() {
 }
 
 function getWeather(lat, lng){
-    const URL_LOCATION = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR&q=${lat}%2C${lng}`;
+    const URL_LOCATION = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR&q=${lat}%2C${lng}`;
     return fetch(URL_LOCATION)
     .then(response => {
         if(response.ok){
@@ -255,7 +255,7 @@ function getWeather(lat, lng){
     })
     .then(responseJson => {
         let location = responseJson.Key;
-        const URL_WEATHER = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location}?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR`;
+        const URL_WEATHER = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location}?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR`;
 
         return fetch(URL_WEATHER)
         .then(response => {
