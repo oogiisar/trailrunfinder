@@ -200,7 +200,6 @@ select {
     .resultContainer {
         grid-template-columns: 1fr;
     }
-    
     .days {
         padding: 4px 9px;
     }
@@ -222,7 +221,6 @@ select {
     #weather img {
         max-width: 40px;
     }
-    
     .days {
         padding: 5px 10px;
     }
@@ -260,12 +258,14 @@ select {
     height: 40px;
     font-size: 18px;
     }
-
-    .resultContainer {
-        grid-template-columns: 1fr 1fr;
-    }
     .trail_name{
         top: 175px;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 860px) {
+    .resultContainer {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
