@@ -30,34 +30,123 @@ body{
 }
 .red_leaf {
     position: absolute;
-    left: 37%;
     width: 40px;
+    animation-name: fall_red;
+    animation-duration: 8s;
+    animation-fill-mode: forwards;
 }
+@keyframes fall_red {
+    0% {
+        left: 37%;
+        bottom: 100%;
+    }
+    25% {
+      left: 39%;
+      bottom: 75%;
+    }
+    50% {
+      left: 37%;
+      bottom: 50%;
+    }
+    75% {
+      left: 41%;
+      bottom: 25%;
+    }
+    100%{
+        left: 38%;
+        bottom: 0;
+    }
+}
+
 .yellow_leaf {
     position: absolute;
-    left: 63%;
     width: 20px;
-    margin-top: 50px;
+    left: 63%;
+    bottom: 25%;
+    animation-name: fall_yellow;
+    animation-delay: 8s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
+@keyframes fall_yellow {
+    0% {
+        left: 63%;
+        bottom: 25%;
+    }
+    100%{
+        bottom: 0;
+        left: 63%;
+    }
+  }
 .gold_leaf{
     position: absolute;
-    left: 77%;
     width: 20px;
-    top: 0;
-}
-.reddish_leaf {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 30px;
+    animation-name: fall_gold;
+    animation-duration: 7s;
+    animation-fill-mode: forwards;
     
 }
+@keyframes fall_gold {
+    0% {
+        left: 77%;
+        bottom: 100%;
+    }
+    25% {
+      left: 75%;
+      bottom: 75%;
+    }
+    50% {
+      left: 78%;
+      bottom: 50%;
+    }
+    75% {
+      left: 76%;
+      bottom: 25%;
+    }
+    100%{
+        left: 77%;
+        bottom: 0;
+    }
+}
+
+.reddish_leaf {
+    position: absolute;
+    width: 30px;
+    animation-name: fall_reddish;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    
+}
+@keyframes fall_reddish {
+    0% {
+        left: 1%;
+        bottom: 100%;
+    }
+    25% {
+      left: 2%;
+      bottom: 75%;
+    }
+    50% {
+      left: 1%;
+      bottom: 50%;
+    }
+    75% {
+      left: 3%;
+      bottom: 25%;
+    }
+    100%{
+        left: 1%;
+        bottom: 0;
+    }
+}
+
 .brown_leaf {
     position: absolute;
     right: 0;
     bottom: 0;
     width: 30px;
 }
+
 .searchContainer {
     background-image: url("img/green_forest.jpg");
     background-repeat: no-repeat;
@@ -76,7 +165,7 @@ body{
 
 #js_search_term {
     display: block;
-    margin: 0 auto;
+    margin: 5px auto;
     width: 350px;
     height: 40px;
     text-align: center;
@@ -93,13 +182,13 @@ body{
     display: block;
     padding-left: 5px;
     margin: 0 auto;
+    cursor: text;
     width: 280px;
     height: 32px;
-    margin-top: 5px;
-    cursor: pointer;
     font-size: 16px; 
     color: rgb(63, 60, 60);  
     background-color: white;
+    cursor: pointer;
   
 }
 select {
@@ -109,35 +198,73 @@ select {
 #search_button {
     display: block;
     -webkit-appearance: none;
-    margin: 0 auto;
-    cursor: pointer;
+    margin: 5px auto;
+    cursor: text;
     width: 200px;
     height: 28px;
     border-radius: 5px;
-    margin-top: 5px;
     font-size: 16px;
     color: rgb(63, 60, 60);
     background-color: white;
+    cursor: pointer;
 }
+.alert  {
+    padding: 10px;
+    padding-bottom: 30px;
+    background-color: #f44336;
+    color: white;
+    width: 350px;
+    height: 25px;
+    margin: 5px auto;
+    border-radius: 5px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+
 .resultContainer {
- 
-    background-color: green;
+    background-image: url("img/green_forest.jpg");
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
 }
 
 .result_item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px none rgba(0, 0, 0, 0.8);
     padding: 20px;
     margin: 20px;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
+    border-radius: 10px;
+}
+.thumbnail {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.result_icon {
+    color: forestgreen;
 }
 .lastContainer {
     position: relative;
-    background-color: green;
+    background-image: url("img/green_forest.jpg");
     height: 100vh;
     color: white;
 }
@@ -190,6 +317,10 @@ select {
     
     #weather{
         font-size: .75em;
+    }
+    .alert {
+        width: 310px;
+        font-size: 14px;
     }
     #weather img {
         max-width: 35px;

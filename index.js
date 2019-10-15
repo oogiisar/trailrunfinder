@@ -210,6 +210,12 @@ const STATES = [
     }
 ]
 
+function alert() {
+    $('.searchContainer').on('click', '.closebtn', function(event){
+        this.parentElement.style.display='none';
+    });
+}
+
 function addStates(){
     for(let i = 0; i < STATES.length; i++){
         $('.states').append(
@@ -218,10 +224,21 @@ function addStates(){
     }
 }
 
+function getQuote() {
+    let count = Math.floor(Math.random() * 3)
+    if(count === 0) {
+        return 'Build a future where people live in harmony with nature.'
+    } else if (count === 1) {
+        return 'No matter what your motivation is, just keep running.'
+    } else {
+        return 'Create your own destination and always push the limits.'
+    }
+}
+
 function searchPage() {
     $('#container').append(
     `<section class=searchContainer>
-        <p id="quote"><q>Build a future where people live in harmony with nature.</q></p>
+        <p id="quote"><q>${getQuote()}</q></p>
         <section class="search">
             <form id="js_form">
                 <label for="search-term"></label>
@@ -322,23 +339,53 @@ function displayTrail(trails){
         });
     });
 }
+function calculateStars(stars){
+    let starIcon = '<i class="fas fa-star result_icon"></i>'
+    let halfStarIcon = '<i class="fas fa-star-half-alt result_icon"></i>'
+    let emptyStarIcon = '<i class="far fa-star result_icon"></i>'
+    const starNum = Math.round(stars*2)/2;
+    if(starNum === 5) {
+        return `${starIcon.repeat(5)}`;
+    } else if(starNum === 4.5) {
+        return starIcon.repeat(4) + halfStarIcon;
+    } else if (starNum === 4){
+        return starIcon.repeat(4) + emptyStarIcon;
+    } else if (starNum === 3.5){
+        return starIcon.repeat(3) + halfStarIcon + emptyStarIcon;
+    } else if (starNum === 3){
+        return starIcon.repeat(3) + emptyStarIcon.repeat(2);
+    } else if (starNum === 2.5){
+        return starIcon.repeat(2) + halfStarIcon + emptyStarIcon.repeat(2);
+    } else if(starNum === 2){
+        return starIcon.repeat(2) + emptyStarIcon.repeat(3);
+    } else if (starNum === 1.5){
+        return starIcon.repeat(1) + halfStarIcon + emptyStarIcon.repeat(3);
+    } else if (starNum === 1){
+        return starIcon.repeat(1) + emptyStarIcon.repeat(4);
+    } else if (starNum === 0.5){
+        return halfStarIcon + emptyStarIcon.repeat(4);
+    } else if (starNum === 0){
+        return  emptyStarIcon.repeat(5);
+    }
+}
 
 function displayResults(trails){
     $('.searchContainer').remove();
     let HTML = `<section class="resultContainer">`
     for(let i = 0; i < trails.length; i++){
+        let stars = calculateStars(trails[i].stars);
         let thumbnail  = ''
         if(trails[i].imgSqSmall === '') {
             thumbnail = `<p class="trail_thumbnail">No image available</p>`;
         } else {
-            thumbnail = `<img src="${trails[i].imgSqSmall}" class="trail_thumbnail" alt="picture of ${trails[i].name} trail">`;
+            thumbnail = `<div class="thumbnail" style="background-image:url('${trails[i].imgMedium}');"></div>`
         }
         HTML = HTML + `
             \n<section class="result_item" id="${i}">
                 ${thumbnail}
                 <p>${trails[i].name}</p>
-                <p>${trails[i].length} miles</p>
-                <p>${trails[i].stars} stars</p>
+                <p><i class="fas fa-running result_icon"></i> ${trails[i].length} miles</p>
+                <p>Rating: ${stars}</p>
             </section>`           
     }
     HTML = HTML + `\n</section>`
@@ -404,7 +451,10 @@ function convertLocation(searchValue) {
             }
             if(found === 0){
                 $('.searchContainer').append(
-                    '<p>Sorry Location Not Found</p>'
+                    `<div class="alert">
+                        <span class="closebtn">&times;</span> 
+                        Sorry Location Not Found
+                    </div>`
                 )
             }
         });
@@ -425,6 +475,8 @@ function watchForm(){
     homeButton();
     searchPage();
     searchSubmit();
+    alert();
 }
+
 $(watchForm);
 
