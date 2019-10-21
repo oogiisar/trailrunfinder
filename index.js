@@ -273,7 +273,7 @@ function getWeather(lat, lng){
     .then(responseJson => {
         let location = responseJson.Key;
         const URL_WEATHER = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location}?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR`;
-
+        
         return fetch(URL_WEATHER)
         .then(response => {
             if(response.ok){
@@ -288,57 +288,6 @@ function getWeather(lat, lng){
     });
 }
 
-function displayTrail(trails){
-    $('#container').on('click', '.result_item', function(event){
-        const thisTrail = trails[event.currentTarget.id];
-        $('.resultContainer').remove();
-        let weather = getWeather(lat, lng);
-        console.log(thisTrail)
-        weather.then(function(result) {
-            let HTML=`
-            <section class="lastContainer">
-                <section id="trail_data">
-                    <h2 class="trail_name">
-                        ${thisTrail.name}
-                    </h2>
-                    <p>
-                        <img src="${thisTrail.imgMedium}" class="trail_picture">
-                    </p>
-                    <p>
-                        Distance: ${thisTrail.length}    Elevation: ${thisTrail.high}    Difficulty: ${thisTrail.difficulty}    Rating: ${thisTrail.stars}/5
-                    </p>
-                    <p>
-                        ${thisTrail.summary}
-                    </p>
-                </section>
-                <section id="weather_box">
-                    <h2>Weather</h2>
-                    <section  id="weather">`
-           for(let i = 0; i < result.DailyForecasts.length; i++){
-                HTML =  HTML +  `\n
-                        <section class="days">
-                            <p><img src="img/weather/${result.DailyForecasts[i].Day.Icon}.png" alt="${result.DailyForecasts[i].Day.IconPhrase}"></p>
-                            <p>High: ${result.DailyForecasts[i].Temperature.Maximum.Value}<p>
-                            <p>Low: ${result.DailyForecasts[i].Temperature.Minimum.Value}<p>
-                        </section>
-                `
-           }
-           console.log(result)
-           HTML = HTML + `
-                    </section>
-                </section>
-                <section id="map">
-                    <iframe width="310" height="310" frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/view?zoom=17&center=${thisTrail.latitude},${thisTrail.longitude}&key=AIzaSyDSgpEvqgcxrbg8p6wVOupU28-Y9VCI2hw" allowfullscreen>
-                    </iframe>
-                </section>
-           `
-           $('#container').append(
-            HTML
-            )
-        });
-    });
-}
 function calculateStars(stars){
     let starIcon = '<i class="fas fa-star result_icon"></i>'
     let halfStarIcon = '<i class="fas fa-star-half-alt result_icon"></i>'
@@ -369,6 +318,59 @@ function calculateStars(stars){
     }
 }
 
+function displayTrail(trails){
+    $('#container').on('click', '.result_item', function(event){
+        const thisTrail = trails[event.currentTarget.id];
+        $('.resultContainer').remove();
+        let weather = getWeather(lat, lng);
+        console.log(thisTrail)
+        weather.then(function(result) {
+            let HTML=`
+            <section class="lastContainer">
+                <section id="trail_data">
+                    <h2 class="trail_name">
+                        ${thisTrail.name}
+                    </h2>
+                    <p>
+                        <img src="${thisTrail.imgMedium}" class="trail_picture">
+                    </p>
+                    <p id="trail_stats">
+                    <i class="fas fa-running result_icon"></i> <span>Distance</span>: ${thisTrail.length} miles <br>   <i class="fas fa-mountain result_icon"></i> <span>Elevation</span>: ${thisTrail.high} feet <br>   <i class="fas fa-flag-checkered result_icon"></i>   <span>Difficulty</span>: ${thisTrail.difficulty} <br>  <span>Ratings</span>: ${calculateStars(thisTrail.stars)}
+                    </p>
+                    <p> 
+                    <i class="fas fa-pen-square result_icon"></i> <span>Description</span>: ${thisTrail.summary}
+                    </p>
+                </section>
+                <section id="weather_box">
+                    <h2>Weather</h2>
+                    <section  id="weather">`
+           for(let i = 0; i < result.DailyForecasts.length; i++){
+                HTML =  HTML +  `\n
+                        <section class="days">
+                            <p><img src="img/weather/${result.DailyForecasts[i].Day.Icon}.png" alt="${result.DailyForecasts[i].Day.IconPhrase}"></p>
+                            <p>High: ${result.DailyForecasts[i].Temperature.Maximum.Value}<p>
+                            <p>Low: ${result.DailyForecasts[i].Temperature.Minimum.Value}<p>
+                        </section>
+                `
+           }
+           console.log(result)
+           HTML = HTML + `
+                    </section>
+                </section>
+                <section id="map">
+                    <h2>Map</h2>
+                    <iframe width="300" height="300""
+                        src="https://www.google.com/maps/embed/v1/view?zoom=17&center=${thisTrail.latitude},${thisTrail.longitude}&key=AIzaSyDSgpEvqgcxrbg8p6wVOupU28-Y9VCI2hw" allowfullscreen>
+                    </iframe>
+                </section>
+            `
+           $('#container').append(
+            HTML
+            )
+        });
+    });
+}
+
 function displayResults(trails){
     $('.searchContainer').remove();
     let HTML = `<section class="resultContainer">`
@@ -383,9 +385,9 @@ function displayResults(trails){
         HTML = HTML + `
             \n<section class="result_item" id="${i}">
                 ${thumbnail}
-                <p>${trails[i].name}</p>
-                <p><i class="fas fa-running result_icon"></i> ${trails[i].length} miles</p>
-                <p>Rating: ${stars}</p>
+                <p class="trail_summary">${trails[i].name}</p>
+                <p class="trail_summary"><i class="fas fa-running result_icon"></i> ${trails[i].length} miles</p>
+                <p class="trail_summary">Rating: ${stars}</p>
             </section>`           
     }
     HTML = HTML + `\n</section>`

@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     margin: 0;
     font-family: Helvetica sans-serif;
 }
@@ -22,12 +22,14 @@ body{
     width: 115px;
     cursor: pointer;
 }
+
 .green_leaf {
     position: absolute;
     left: 22%;
     width: 30px;
     bottom: 0;
 }
+
 .red_leaf {
     position: absolute;
     width: 40px;
@@ -35,6 +37,7 @@ body{
     animation-duration: 8s;
     animation-fill-mode: forwards;
 }
+
 @keyframes fall_red {
     0% {
         left: 37%;
@@ -68,6 +71,7 @@ body{
     animation-duration: 1s;
     animation-fill-mode: forwards;
 }
+
 @keyframes fall_yellow {
     0% {
         left: 63%;
@@ -86,6 +90,7 @@ body{
     animation-fill-mode: forwards;
     
 }
+
 @keyframes fall_gold {
     0% {
         left: 77%;
@@ -117,6 +122,7 @@ body{
     animation-fill-mode: forwards;
     
 }
+
 @keyframes fall_reddish {
     0% {
         left: 1%;
@@ -155,11 +161,13 @@ body{
     height: 90vh;
 
 }
+
 #quote {
     margin-top: 0;
     padding-top: 180px;
     color: white;
-    font-size: 35px;
+    font-size: 50px;
+    text-shadow: black 0px 0px 10px;
 }
 
 
@@ -174,6 +182,7 @@ body{
     font-size: 16px;
     color:  rgb(63, 60, 60);
 }
+
 ::placeholder {
     color: rgb(63, 60, 60);
 }
@@ -191,6 +200,7 @@ body{
     cursor: pointer;
   
 }
+
 select {
     text-align-last: center;
 }
@@ -208,6 +218,7 @@ select {
     background-color: white;
     cursor: pointer;
 }
+
 .alert  {
     padding: 10px;
     padding-bottom: 30px;
@@ -228,11 +239,11 @@ select {
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
-  }
+}
   
-  .closebtn:hover {
+.closebtn:hover {
     color: black;
-  }
+}
 
 .resultContainer {
     background-image: url("img/green_forest.jpg");
@@ -247,8 +258,19 @@ select {
     padding: 20px;
     margin: 20px;
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     border-radius: 10px;
+    transition-property: background;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    cursor: pointer;
+}
+
+.result_item:hover {
+    background: rgb(197, 196, 196);
+}
+.trail_thumbnail {
+    margin: 25px;
 }
 .thumbnail {
     width: 250px;
@@ -262,44 +284,71 @@ select {
 .result_icon {
     color: forestgreen;
 }
+
+.trail_summary {
+    margin-left: 25px;
+}
+
 .lastContainer {
     position: relative;
     background-image: url("img/green_forest.jpg");
     height: 100vh;
-    color: white;
 }
+
 #trail_data {
+    background-color: rgba(255, 255, 255, 0.9);
     display: inline-block;
     width: 40%;
     margin-left: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+
+
 }
 
 #weather_box {
+    background-color: rgba(255, 255, 255, 0.9);
     float: right;
     margin: 20px;
     text-align: center;
+    border-radius: 10px;
+    padding: 0 20px 20px;
 }
+
 .trail_name {
     font-size: 30px;
     text-align: center;
 }
+
 .trail_picture {
-    width: 500px;
-    margin-bottom: 30px;
+    width: 90%;
+    border-radius: 10px;
+
+}
+span {
+    font-weight: bold;
 }
 
 #weather {
     display: inline-grid;
+    background-color: rgb(29, 84, 179);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     font-size: 15px;
     line-height: 5px;
+    color: white;
+ 
 }
+
 #weather img {
     max-width: 60px;
 }
 
 .days {
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px dotted white;
+    border-bottom: none;
+    border-top: none;
     text-align: center;
     padding: 10px 20px;
 }
@@ -308,19 +357,59 @@ select {
     position: absolute;
     top: 275px;
     right: 120px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 20px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 0 20px 20px;
 }
 
-@media only screen and (max-width: 320px) {
+#map iframe {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+    #quote{
+        padding-top: 80px;
+        font-size: 35px;
+    }
+
     #js_search_term {
         width: 310px;
     }
     
-    #weather{
-        font-size: .75em;
-    }
     .alert {
         width: 310px;
         font-size: 14px;
+    }
+    .resultContainer {
+        grid-template-columns: 1fr;
+    }
+    .result_item {
+        margin: 10px auto;
+        width: 290px;
+        height: 462px;
+    }
+    .lastContainer {
+        height: 100%;
+    }
+    .days {
+        padding: 4px 9px;
+    }
+    #trail_data {
+        width: 100%;
+        margin-left: 0;
+    }
+    .trail_name {
+        font-size: 18px;
+    }
+    .trail_picture {
+        width: 290px;
+    }
+    #weather_box {
+        margin: 10px 0;
+        float: none;
     }
     #weather img {
         max-width: 35px;
@@ -328,93 +417,64 @@ select {
     #weather{
         font-size: .6em;
     }
+    #map {
+        position: static;
+        overflow: hidden;
+        padding: 0;
+        margin: 20px 0;
+        width: 100%;
+    }
+
+}
+
+/*@media only screen and (min-width: 501px) and (max-width: 715px) {
     .resultContainer {
         grid-template-columns: 1fr;
     }
+        .result_item {
+        margin: 10px auto;
+        width: 290px;
+        height: 462px;
+    }
+}
+@media only screen and (min-width: 716px) and (max-width: 1016px) {
+    .resultContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+    .lastContainer {
+        height: 100%;
+    }
     .days {
         padding: 4px 9px;
+    }
+    #trail_data {
+        width: 80%;
+        margin-left: 0;
     }
     .trail_name {
         font-size: 18px;
     }
     .trail_picture {
-        width: 310px;
+        width: 320px;
     }
-
-}
-@media only screen and (min-width: 321px) and  (max-width: 600px) {
-    .lastContainer {
-        font-size: .75em;
+    #weather_box {
+        margin: 10px 0;
+        float: none;
+    }
+    #weather img {
+        max-width: 35px;
+    }
+    #map {
+        position: static;
+        overflow: hidden;
+        padding: 0;
+        margin: 20px auto;
+        width: 80%;
     }
     #weather{
         font-size: .75em;
     }
-    #weather img {
-        max-width: 40px;
-    }
-    .days {
-        padding: 5px 10px;
-    }
-    .trail_name {
-        font-size: 20px;
-    }
-    .trail_picture {
-        width: 350px;
-    }
 }
 
 
-
-@media only screen and (min-width: 601px) {
-    .logo {
-        width: 150px;
-        bottom: 10px;
-    }
-    #quote  {
-        font-size: 60px;
-    }
-
-    #js_search_term {
-    width: 380px;
-    height: 50px;
-    font-size: 18px;
-    }
-    .states {
-    width: 310px;
-    height: 45px;
-    font-size: 18px;
-    }
-    #search_button {
-    width: 220px;
-    height: 40px;
-    font-size: 18px;
-    }
-    .trail_name{
-        top: 175px;
-    }
-}
-
-@media only screen and (min-width: 321px) and (max-width: 860px) {
-    .resultContainer {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media only screen and (max-width: 1065px ) {
-    .lastContainer {
-        height: 100%;
-    }
-
-    #weather_box {
-        float: none;
-    }
-    #trail_data, #map {
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-    }
-    #map {
-        position: static;
-    }
-}
-
+*/
