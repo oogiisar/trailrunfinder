@@ -359,7 +359,7 @@ function displayTrail(trails){
                 </section>
                 <section id="map">
                     <h2>Map</h2>
-                    <iframe width="300" height="300""
+                    <iframe width="280" height="280""
                         src="https://www.google.com/maps/embed/v1/view?zoom=17&center=${thisTrail.latitude},${thisTrail.longitude}&key=AIzaSyDSgpEvqgcxrbg8p6wVOupU28-Y9VCI2hw" allowfullscreen>
                     </iframe>
                 </section>
@@ -452,7 +452,7 @@ function convertLocation(searchValue) {
                 } 
             }
             if(found === 0){
-                $('.searchContainer').append(
+                $('.search').append(
                     `<div class="alert">
                         <span class="closebtn">&times;</span> 
                         Sorry Location Not Found

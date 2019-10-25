@@ -7,35 +7,41 @@ body {
     font-family: Helvetica sans-serif;
 }
 
+/* 
+
+Header 
+
+*/
 .nav_bar {
-    width: 100%;
-    height: 100px;
-    background-color: rgb(white);
     position: relative;
-    
+    width: 100%;
+    height: 80px;
+    background-color: rgb(white);
 }
 
 .logo {
-    position: absolute;
-    left: 18px;
-    bottom: 22px;
+    margin: 20px 10px;
     width: 115px;
     cursor: pointer;
 }
 
-.green_leaf {
+.leaf { 
+    width: 20px;
     position: absolute;
-    left: 22%;
-    width: 30px;
+}
+
+.animate {
+    animation-fill-mode: forwards;
+}
+
+#green_leaf {
+    left: 28%;
     bottom: 0;
 }
 
-.red_leaf {
-    position: absolute;
-    width: 40px;
+#red_leaf {
     animation-name: fall_red;
     animation-duration: 8s;
-    animation-fill-mode: forwards;
 }
 
 @keyframes fall_red {
@@ -61,15 +67,12 @@ body {
     }
 }
 
-.yellow_leaf {
-    position: absolute;
-    width: 20px;
+#yellow_leaf {
     left: 63%;
     bottom: 25%;
     animation-name: fall_yellow;
     animation-delay: 8s;
     animation-duration: 1s;
-    animation-fill-mode: forwards;
 }
 
 @keyframes fall_yellow {
@@ -82,13 +85,9 @@ body {
         left: 63%;
     }
   }
-.gold_leaf{
-    position: absolute;
-    width: 20px;
+#gold_leaf{
     animation-name: fall_gold;
     animation-duration: 7s;
-    animation-fill-mode: forwards;
-    
 }
 
 @keyframes fall_gold {
@@ -114,13 +113,9 @@ body {
     }
 }
 
-.reddish_leaf {
-    position: absolute;
-    width: 30px;
+#reddish_leaf {
     animation-name: fall_reddish;
     animation-duration: 10s;
-    animation-fill-mode: forwards;
-    
 }
 
 @keyframes fall_reddish {
@@ -146,93 +141,73 @@ body {
     }
 }
 
-.brown_leaf {
-    position: absolute;
+#brown_leaf {
     right: 0;
     bottom: 0;
-    width: 30px;
 }
 
-.searchContainer {
+/* 
+
+Global CSS 
+
+*/
+
+#container {
     background-image: url("img/green_forest.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
+}
+
+/* 
+
+Search page 
+
+*/
+
+.searchContainer {
     text-align: center;
     height: 90vh;
-
 }
 
 #quote {
-    margin-top: 0;
-    padding-top: 180px;
+    margin: 0;
+    padding: 60px 10px;
     color: white;
-    font-size: 50px;
+    font-size: 25px;
     text-shadow: black 0px 0px 10px;
 }
 
-
-#js_search_term {
+.search {
+    position: absolute;
+    top: 250px;
     display: block;
-    margin: 5px auto;
-    width: 350px;
-    height: 40px;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
     color:  rgb(63, 60, 60);
 }
 
-::placeholder {
-    color: rgb(63, 60, 60);
-}
-
-.states {
-    display: block;
-    padding-left: 5px;
-    margin: 0 auto;
-    cursor: text;
-    width: 280px;
-    height: 32px;
-    font-size: 16px; 
-    color: rgb(63, 60, 60);  
+#js_search_term, .states, #search_button, .alert {
+    width: 300px;
+    height: 30px;
+    margin: 3px auto;
+    font-size: 16px;
     background-color: white;
-    cursor: pointer;
-  
+    border-radius: 5px;
+}
+#js_search_term {
+    text-align: center;
+    border: none;
 }
 
 select {
     text-align-last: center;
 }
 
-#search_button {
-    display: block;
-    -webkit-appearance: none;
-    margin: 5px auto;
-    cursor: text;
-    width: 200px;
-    height: 28px;
-    border-radius: 5px;
-    font-size: 16px;
-    color: rgb(63, 60, 60);
-    background-color: white;
-    cursor: pointer;
-}
-
 .alert  {
-    padding: 10px;
-    padding-bottom: 30px;
+    padding: 6px;
     background-color: #f44336;
     color: white;
-    width: 350px;
-    height: 25px;
-    margin: 5px auto;
-    border-radius: 5px;
 }
 
 .closebtn {
-    margin-left: 15px;
-    color: white;
     font-weight: bold;
     float: right;
     font-size: 22px;
@@ -245,20 +220,24 @@ select {
     color: black;
 }
 
+/* 
+
+Results Page 
+
+*/
+
 .resultContainer {
-    background-image: url("img/green_forest.jpg");
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 10px;
+    grid-template-columns: 1fr;
 }
 
 .result_item {
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px none rgba(0, 0, 0, 0.8);
+    margin: 5px auto;
     padding: 20px;
-    margin: 20px;
-    font-size: 20px;
-    text-align: left;
+    width: 300px;
+    height: 410px;
     border-radius: 10px;
     transition-property: background;
     transition-duration: 0.5s;
@@ -289,32 +268,52 @@ select {
     margin-left: 25px;
 }
 
+/* 
+
+Details Page 
+
+*/
 .lastContainer {
-    position: relative;
-    background-image: url("img/green_forest.jpg");
-    height: 100vh;
+    margin: 0;
+    padding-top: 5px;
 }
 
 #trail_data {
+    width: 300px;
+    margin: 5px auto;
+    padding: 10px;
     background-color: rgba(255, 255, 255, 0.9);
-    display: inline-block;
-    width: 40%;
-    margin-left: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
     text-align: center;
     font-size: 18px;
-
-
+    border-radius: 10px;
 }
 
 #weather_box {
+    width: 300px;
+    margin: 5px auto;
     background-color: rgba(255, 255, 255, 0.9);
-    float: right;
-    margin: 20px;
     text-align: center;
+    padding: 10px;
     border-radius: 10px;
-    padding: 0 20px 20px;
+}
+#weather {
+    display: inline-grid;
+    background-color: rgb(29, 84, 179);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    font-size: 10px;
+    color: white;
+}
+
+#weather img {
+    max-width: 35px;
+}
+
+.days {
+    border: 1px dotted white;
+    border-bottom: none;
+    border-top: none;
+    text-align: center;
+    padding: 10px 10px;
 }
 
 .trail_name {
@@ -331,150 +330,16 @@ span {
     font-weight: bold;
 }
 
-#weather {
-    display: inline-grid;
-    background-color: rgb(29, 84, 179);
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    font-size: 15px;
-    line-height: 5px;
-    color: white;
- 
-}
-
-#weather img {
-    max-width: 60px;
-}
-
-.days {
-    border: 1px dotted white;
-    border-bottom: none;
-    border-top: none;
-    text-align: center;
-    padding: 10px 20px;
-}
-
 #map {
-    position: absolute;
-    top: 275px;
-    right: 120px;
+    width: 300px;
+    margin: 5px auto;
     background-color: rgba(255, 255, 255, 0.9);
-    margin: 20px;
     text-align: center;
     border-radius: 10px;
-    padding: 0 20px 20px;
+    padding: 20px 0;
 }
 
 #map iframe {
     border: 1px solid black;
     border-radius: 10px;
 }
-
-@media only screen and (max-width: 500px) {
-    #quote{
-        padding-top: 80px;
-        font-size: 35px;
-    }
-
-    #js_search_term {
-        width: 310px;
-    }
-    
-    .alert {
-        width: 310px;
-        font-size: 14px;
-    }
-    .resultContainer {
-        grid-template-columns: 1fr;
-    }
-    .result_item {
-        margin: 10px auto;
-        width: 290px;
-        height: 462px;
-    }
-    .lastContainer {
-        height: 100%;
-    }
-    .days {
-        padding: 4px 9px;
-    }
-    #trail_data {
-        width: 100%;
-        margin-left: 0;
-    }
-    .trail_name {
-        font-size: 18px;
-    }
-    .trail_picture {
-        width: 290px;
-    }
-    #weather_box {
-        margin: 10px 0;
-        float: none;
-    }
-    #weather img {
-        max-width: 35px;
-    }
-    #weather{
-        font-size: .6em;
-    }
-    #map {
-        position: static;
-        overflow: hidden;
-        padding: 0;
-        margin: 20px 0;
-        width: 100%;
-    }
-
-}
-
-/*@media only screen and (min-width: 501px) and (max-width: 715px) {
-    .resultContainer {
-        grid-template-columns: 1fr;
-    }
-        .result_item {
-        margin: 10px auto;
-        width: 290px;
-        height: 462px;
-    }
-}
-@media only screen and (min-width: 716px) and (max-width: 1016px) {
-    .resultContainer {
-        grid-template-columns: 1fr 1fr;
-    }
-    .lastContainer {
-        height: 100%;
-    }
-    .days {
-        padding: 4px 9px;
-    }
-    #trail_data {
-        width: 80%;
-        margin-left: 0;
-    }
-    .trail_name {
-        font-size: 18px;
-    }
-    .trail_picture {
-        width: 320px;
-    }
-    #weather_box {
-        margin: 10px 0;
-        float: none;
-    }
-    #weather img {
-        max-width: 35px;
-    }
-    #map {
-        position: static;
-        overflow: hidden;
-        padding: 0;
-        margin: 20px auto;
-        width: 80%;
-    }
-    #weather{
-        font-size: .75em;
-    }
-}
-
-
-*/
