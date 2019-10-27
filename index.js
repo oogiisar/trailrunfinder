@@ -242,11 +242,11 @@ function searchPage() {
         <section class="search">
             <form id="js_form">
                 <label for="search-term"></label>
-                <input type="text" name="enter your city" id="js_search_term" placeholder="Enter Your City" required>
-                    <select name="states" class="states">
+                <input type="text" name="enter your city" id="js_search_term" class="search_field" placeholder="Enter Your City" required>
+                    <select name="states" class="states search_field">
                     </select>
                 <label for="search-button"></label>
-                <input type="submit" value="Search" id="search_button">
+                <input type="submit" value="Search" id="search_button" class="search_field">
             </form>
         </section>
     </section>`
@@ -318,6 +318,25 @@ function calculateStars(stars){
     }
 }
 
+function getDay(theDate) {
+    let today = theDate.getDay();
+    if(today === 0) {
+        return 'Sunday'
+    } else if(today === 1) {
+        return 'Monday'
+    } else if(today === 2) {
+        return 'Tuesday'
+    } else if(today === 3) {
+        return 'Wednesday'
+    } else if(today === 4) {
+        return 'Thursday'
+    } else if(today === 5) {
+        return 'Friday'
+    } else if(today === 6) {
+        return 'Saturday'
+    }
+}
+
 function displayTrail(trails){
     $('#container').on('click', '.result_item', function(event){
         const thisTrail = trails[event.currentTarget.id];
@@ -325,6 +344,7 @@ function displayTrail(trails){
         let weather = getWeather(lat, lng);
         console.log(thisTrail)
         weather.then(function(result) {
+            console.log(result)
             let HTML=`
             <section class="lastContainer">
                 <section id="trail_data">
@@ -344,9 +364,12 @@ function displayTrail(trails){
                 <section id="weather_box">
                     <h2>Weather</h2>
                     <section  id="weather">`
-           for(let i = 0; i < result.DailyForecasts.length; i++){
+            for(let i = 0; i < result.DailyForecasts.length; i++){
+                let theDate = new Date(result.DailyForecasts[i].Date);
+                let theDay = (i === 0) ? 'Today':getDay(theDate);
                 HTML =  HTML +  `\n
                         <section class="days">
+                            <p>${theDay}</p>
                             <p><img src="img/weather/${result.DailyForecasts[i].Day.Icon}.png" alt="${result.DailyForecasts[i].Day.IconPhrase}"></p>
                             <p>High: ${result.DailyForecasts[i].Temperature.Maximum.Value}<p>
                             <p>Low: ${result.DailyForecasts[i].Temperature.Minimum.Value}<p>
@@ -481,4 +504,3 @@ function watchForm(){
 }
 
 $(watchForm);
-

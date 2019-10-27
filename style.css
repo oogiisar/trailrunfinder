@@ -173,18 +173,18 @@ Search page
     margin: 0;
     padding: 60px 10px;
     color: white;
-    font-size: 25px;
+    font-size: 27px;
     text-shadow: black 0px 0px 10px;
 }
 
 .search {
     position: absolute;
-    top: 250px;
+    top: 350px;
     display: block;
     color:  rgb(63, 60, 60);
 }
 
-#js_search_term, .states, #search_button, .alert {
+.search_field, .alert {
     width: 300px;
     height: 30px;
     margin: 3px auto;
@@ -197,8 +197,13 @@ Search page
     border: none;
 }
 
+#search_button {
+    cursor: pointer;
+}
+
 select {
     text-align-last: center;
+    cursor: pointer;
 }
 
 .alert  {
@@ -229,6 +234,7 @@ Results Page
 .resultContainer {
     display: grid;
     grid-template-columns: 1fr;
+    margin: 0 auto;
 }
 
 .result_item {
@@ -313,7 +319,7 @@ Details Page
     border-bottom: none;
     border-top: none;
     text-align: center;
-    padding: 10px 10px;
+    padding: 8px 8px;
 }
 
 .trail_name {
@@ -324,7 +330,6 @@ Details Page
 .trail_picture {
     width: 90%;
     border-radius: 10px;
-
 }
 span {
     font-weight: bold;
@@ -342,4 +347,63 @@ span {
 #map iframe {
     border: 1px solid black;
     border-radius: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+    .nav_bar {
+        width: 100%;
+        height: 120px;
+    }
+    .logo {
+        margin: 30px 20px;
+        width: 130px;
+    }
+    .leaf { 
+        width: 25px;
+    }
+    .search {
+        position: relative;
+        top: 100px;
+    }
+    .search_field {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 620px) and (max-width: 959px) {
+    .resultContainer {
+        grid-template-columns: 1fr 1fr;
+        max-width: 700px;
+        font-size: 1.2em;
+    }
+    #quote {
+        font-size: 2.5em;
+    }
+    .search_field {
+        width: 590px;
+        height: 40px;
+        font-size: 1.5em;
+    }
+    .result_item {
+        height: 425px;
+    }
+}
+
+@media  only screen and (min-width: 960px) {
+    .resultContainer {
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 1050px;
+        font-size: 1.3em;
+    }
+    #quote {
+        font-size: 3em;
+    }
+    .search_field {
+        width: 650px;
+        height: 45px;
+        font-size: 1.75em;
+    }
+    .result_item {
+        height: 450px;
+    }
 }
