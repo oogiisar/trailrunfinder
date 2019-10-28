@@ -154,7 +154,6 @@ Global CSS
 
 #container {
     background-image: url("img/green_forest.jpg");
-    background-size: cover;
     height: 100%;
 }
 
@@ -203,6 +202,7 @@ Search page
 
 select {
     text-align-last: center;
+    text-align: -webkit-center;
     cursor: pointer;
 }
 
@@ -279,6 +279,7 @@ Results Page
 Details Page 
 
 */
+
 .lastContainer {
     margin: 0;
     padding-top: 5px;
@@ -331,6 +332,10 @@ Details Page
     width: 90%;
     border-radius: 10px;
 }
+#trail_stats {
+    text-align: left;
+    margin-left: 15px;
+}
 span {
     font-weight: bold;
 }
@@ -341,15 +346,20 @@ span {
     background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
     border-radius: 10px;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 #map iframe {
     border: 1px solid black;
     border-radius: 10px;
+    width: 280px;
+    height: 280px;
 }
 
 @media only screen and (min-width: 600px) {
+    #container {
+        background-size: cover;
+    }
     .nav_bar {
         width: 100%;
         height: 120px;
@@ -369,6 +379,57 @@ span {
         display: block;
     }
 }
+
+/*
+
+Styling for detials page requires different break points
+
+*/
+
+
+@media only screen and (min-width: 684px) {
+    .lastContainer {
+        text-align: center;
+        margin: 0 auto;
+        height: 90vh;
+    }
+    #trail_data {
+        display: inline-block;
+        vertical-align: top;
+        height: 608px;
+    }
+    .grouped {
+        display: inline-block;
+        vertical-align: top;
+    }
+    #trail_data, #weather_box, #map {
+        margin: 20px;
+    }
+}
+
+@media only screen and (min-width: 835px) {
+    #trail_data, #weather_box, #map {
+        width: 375px;
+    }  
+    #trail_data {
+        height: 638px;
+    } 
+    #weather {
+        font-size: 13px;
+    }
+    #weather img {
+        max-width: 45px;
+    }
+    #map iframe {
+        width: 350px;
+    }
+}
+
+/*
+
+End details styling
+
+*/
 
 @media only screen and (min-width: 620px) and (max-width: 959px) {
     .resultContainer {

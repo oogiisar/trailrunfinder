@@ -2,7 +2,7 @@
 
 let lat = ''
 let lng = ''
-
+// Define all states
 const STATES = [
     {
         state: 'Alabama',
@@ -209,21 +209,21 @@ const STATES = [
         code: 'wy'
     }
 ]
-
+//close the alert box
 function alert() {
     $('.searchContainer').on('click', '.closebtn', function(event){
         this.parentElement.style.display='none';
     });
 }
-
-function addStates(){
+// add states to the dropdown box
+function addStates(selector){
     for(let i = 0; i < STATES.length; i++){
-        $('.states').append(
+        $(`${selector}`).append(
             `<option value="${STATES[i].code}">${STATES[i].state}</option>`
         )
     }
 }
-
+// randomly select one of the quotes
 function getQuote() {
     let count = Math.floor(Math.random() * 3)
     if(count === 0) {
@@ -234,7 +234,7 @@ function getQuote() {
         return 'Create your own destination and always push the limits.'
     }
 }
-
+// build first search page 
 function searchPage() {
     $('#container').append(
     `<section class=searchContainer>
@@ -251,15 +251,15 @@ function searchPage() {
         </section>
     </section>`
     )
-    addStates();
+    addStates('.states');
 }
-
+// Reload page on logo click
 function homeButton() {
     $('.logo').on('click', function(event) {
         location.reload();
     });
 }
-
+// Gets 5 days weather for longitude and latitude
 function getWeather(lat, lng){
     const URL_LOCATION = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=69Zwc4FSfqEUm9rlLIslDXIdoz6UgRkR&q=${lat}%2C${lng}`;
     return fetch(URL_LOCATION)
@@ -287,7 +287,7 @@ function getWeather(lat, lng){
         });
     });
 }
-
+// Convert number of stars to icons
 function calculateStars(stars){
     let starIcon = '<i class="fas fa-star result_icon"></i>'
     let halfStarIcon = '<i class="fas fa-star-half-alt result_icon"></i>'
@@ -317,7 +317,7 @@ function calculateStars(stars){
         return  emptyStarIcon.repeat(5);
     }
 }
-
+// Convert date to days of the week 
 function getDay(theDate) {
     let today = theDate.getDay();
     if(today === 0) {
@@ -336,15 +336,13 @@ function getDay(theDate) {
         return 'Saturday'
     }
 }
-
+// Removes the result page and displays trail data to the DOM
 function displayTrail(trails){
     $('#container').on('click', '.result_item', function(event){
         const thisTrail = trails[event.currentTarget.id];
         $('.resultContainer').remove();
         let weather = getWeather(lat, lng);
-        console.log(thisTrail)
         weather.then(function(result) {
-            console.log(result)
             let HTML=`
             <section class="lastContainer">
                 <section id="trail_data">
@@ -355,36 +353,34 @@ function displayTrail(trails){
                         <img src="${thisTrail.imgMedium}" class="trail_picture">
                     </p>
                     <p id="trail_stats">
-                    <i class="fas fa-running result_icon"></i> <span>Distance</span>: ${thisTrail.length} miles <br>   <i class="fas fa-mountain result_icon"></i> <span>Elevation</span>: ${thisTrail.high} feet <br>   <i class="fas fa-flag-checkered result_icon"></i>   <span>Difficulty</span>: ${thisTrail.difficulty} <br>  <span>Ratings</span>: ${calculateStars(thisTrail.stars)}
-                    </p>
-                    <p> 
-                    <i class="fas fa-pen-square result_icon"></i> <span>Description</span>: ${thisTrail.summary}
+                    <i class="fas fa-running result_icon"></i> <span>Distance</span>: ${thisTrail.length} miles <br>   <i class="fas fa-mountain result_icon"></i> <span>Elevation</span>: ${thisTrail.high} feet <br>   <i class="fas fa-flag-checkered result_icon"></i>   <span>Difficulty</span>: ${thisTrail.difficulty} <br>  <span>Ratings</span>: ${calculateStars(thisTrail.stars)} <br><br> <i class="fas fa-pen-square result_icon"></i> <span>Description</span>: ${thisTrail.summary}
                     </p>
                 </section>
-                <section id="weather_box">
-                    <h2>Weather</h2>
-                    <section  id="weather">`
+                <section class="grouped">
+                    <section id="weather_box">
+                        <h2>Weather</h2>
+                        <section  id="weather">`
             for(let i = 0; i < result.DailyForecasts.length; i++){
                 let theDate = new Date(result.DailyForecasts[i].Date);
                 let theDay = (i === 0) ? 'Today':getDay(theDate);
                 HTML =  HTML +  `\n
-                        <section class="days">
-                            <p>${theDay}</p>
-                            <p><img src="img/weather/${result.DailyForecasts[i].Day.Icon}.png" alt="${result.DailyForecasts[i].Day.IconPhrase}"></p>
-                            <p>High: ${result.DailyForecasts[i].Temperature.Maximum.Value}<p>
-                            <p>Low: ${result.DailyForecasts[i].Temperature.Minimum.Value}<p>
-                        </section>
+                            <section class="days">
+                                <p>${theDay}</p>
+                                <p><img src="img/weather/${result.DailyForecasts[i].Day.Icon}.png" alt="${result.DailyForecasts[i].Day.IconPhrase}"></p>
+                                <p>High: ${result.DailyForecasts[i].Temperature.Maximum.Value}<p>
+                                <p>Low: ${result.DailyForecasts[i].Temperature.Minimum.Value}<p>
+                            </section>
                 `
            }
-           console.log(result)
            HTML = HTML + `
+                        </section>
                     </section>
-                </section>
-                <section id="map">
-                    <h2>Map</h2>
-                    <iframe width="280" height="280""
-                        src="https://www.google.com/maps/embed/v1/view?zoom=17&center=${thisTrail.latitude},${thisTrail.longitude}&key=AIzaSyDSgpEvqgcxrbg8p6wVOupU28-Y9VCI2hw" allowfullscreen>
-                    </iframe>
+                    <section id="map">
+                        <h2>Map</h2>
+                        <iframe width="100%" height="100%"
+                            src="https://www.google.com/maps/embed/v1/view?zoom=17&center=${thisTrail.latitude},${thisTrail.longitude}&key=AIzaSyDSgpEvqgcxrbg8p6wVOupU28-Y9VCI2hw" allowfullscreen>
+                        </iframe>
+                    </section>
                 </section>
             `
            $('#container').append(
@@ -393,7 +389,7 @@ function displayTrail(trails){
         });
     });
 }
-
+// Remove search page and display the results in the DOM
 function displayResults(trails){
     $('.searchContainer').remove();
     let HTML = `<section class="resultContainer">`
@@ -418,10 +414,9 @@ function displayResults(trails){
         HTML
     );
     
-    console.log(trails);
     displayTrail(trails);    
 }
-
+// searches trail run project api for trails
 function findTrails(latlng) {
     const URL = `
     https://www.trailrunproject.com/data/get-trails?${latlng}&maxResults=9&key=200606806-5ae79cd5800169262d1a54f0396a1d5f`;
@@ -434,6 +429,7 @@ function findTrails(latlng) {
             }
         })
         .then(responseJson => {
+            // make sure if there are trails in the response
             if(responseJson.success === 1){
                 if(responseJson.trails.length === 0){
                     $('.searchContainer').append(
@@ -450,6 +446,7 @@ function findTrails(latlng) {
            
         });
 }
+// convert city and states to longitude and latitude
 function convertLocation(searchValue) {
     const URL = `https://api.opencagedata.com/geocode/v1/json?key=463a46a2313b4f11bc90c9a627dabc7e&q=${searchValue}`;
     fetch(URL)
@@ -460,20 +457,20 @@ function convertLocation(searchValue) {
                 throw new Error(response.statusText);
             }
         })
+        // select the the first city type result from the response
         .then(responseJson => {
             let found = 0
             for(let i = 0; i < responseJson.results.length; i++) {
                 if(responseJson.results[i].components._type === 'city'){
                     found = 1
-                    console.log(responseJson.results[i].geometry);
                     lat = responseJson.results[i].geometry.lat;
                     lng = responseJson.results[i].geometry.lng;
                     let latlng = `lat=${lat}&lon=${lng}`
-                    console.log(latlng);
                     findTrails(latlng);
                     break;
                 } 
             }
+            // if city type response not found send the error
             if(found === 0){
                 $('.search').append(
                     `<div class="alert">
@@ -484,8 +481,7 @@ function convertLocation(searchValue) {
             }
         });
 }
-
-
+// listening for submit on the search page and get values 
 function searchSubmit() {
     $('#container').on('submit', function(event){
         event.preventDefault();
@@ -496,11 +492,12 @@ function searchSubmit() {
 
     })
 }
+// Page setup
 function watchForm(){
     homeButton();
     searchPage();
     searchSubmit();
     alert();
 }
-
+// Page load listener
 $(watchForm);
