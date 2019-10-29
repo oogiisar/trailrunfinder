@@ -331,6 +331,7 @@ Details Page
 .trail_picture {
     width: 90%;
     border-radius: 10px;
+    max-height: 310px;
 }
 #trail_stats {
     text-align: left;
